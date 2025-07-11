@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="https://discord.gg/bWKYTBqF" target="_blank">
+      <img src="discord-icon.png" alt="Discord" class="discord-icon">
+    </a>
+
+    <div class="left-buttons">
+      <span class="nav-btn" id="btn-explain">شرح</span>
+      <span class="nav-btn" id="btn-store">المتجر</span>
+    </div>
+
+    <img src="logo.png" class="logo" alt="Logo">
+  </div>
+
+  <!-- قسم شرح المتجر -->
+  <div id="section-explain" class="section active">
+    <h1>شرح المتجر</h1>
+    <p>متجرنا متخصص للبرمجة سيرفرات الديسكورد واللوقهات والثمبنيلات | للشراء الرجاء التوجه الى سيرفر الديسكورد وافتح تكت</p>
+    <a href="https://discord.gg/bWKYTBqF" target="_blank" class="discord-button">ادخل سيرفر الديسكورد</a>
+  </div>
+
+  <!-- قسم المتجر -->
+  <div id="section-store" class="section">
+    <div class="product-list">
+      <div class="product" data-index="0">
+        <img src="LOGO S.png" alt="Product 1">
+        <p>لوقو حرف $9</p>
+      </div>
+      <div class="product" data-index="1">
+        <img src="bnr.png" alt="Product 2">
+        <p>بنر $10</p>
+      </div>
+      <div class="product" data-index="2">
+        <img src="خط.png" alt="Product 3">
+        <p>خط $4</p>
+      </div>
+      <div class="product" data-index="3">
+        <img src="برمجه.png" alt="Product 4">
+        <p>برمجة سيرفر $10</p>
+      </div>
+      <div class="product" data-index="4">
+        <img src="بكج.png" alt="Product 5">
+        <p>بكج $17</p>
+      </div>
+      <div class="product" data-index="5">
+        <img src="تطوير.png" alt="Product 6">
+        <p>تطوير $8</p>
+      </div>
+      <div class="product" data-index="6">
+        <img src="ثمبنيل.png" alt="Product 7">
+        <p>ثمبنيل $7</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- قسم تفاصيل المنتج -->
+  <div id="product-detail" class="section">
+    <button id="back-to-store" class="back-button">رجوع</button>
+    <div class="product-detail-content">
+      <img id="detail-image" src="" alt="Product Image">
+      <h2 id="detail-title"></h2>
+      <p id="detail-description"></p>
+      <h3 id="examples-title">أمثلة</h3>
+      <div class="examples">
+        <img id="example1" src="" alt="مثال 1">
+        <img id="example2" src="" alt="مثال 2">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const btnExplain = document.getElementById("btn-explain");
+    const btnStore = document.getElementById("btn-store");
+    const sectionExplain = document.getElementById("section-explain");
+    const sectionStore = document.getElementById("section-store");
+    const productDetail = document.getElementById("product-detail");
+
+    const backToStoreBtn = document.getElementById("back-to-store");
+    const detailImage = document.getElementById("detail-image");
+    const detailTitle = document.getElementById("detail-title");
+    const detailDescription = document.getElementById("detail-description");
+
+    const example1 = document.getElementById("example1");
+    const example2 = document.getElementById("example2");
+
+    btnExplain.onclick = () => {
+      sectionExplain.classList.add("active");
+      sectionStore.classList.remove("active");
+      productDetail.classList.remove("active");
+    };
+
+    btnStore.onclick = () => {
+      sectionExplain.classList.remove("active");
+      sectionStore.classList.add("active");
+      productDetail.classList.remove("active");
+    };
+
+    const productData = [
+      {
+        title: "لوقو حرف $9",
+        desc: "تصميم لوقو احترافي حسب طلبك.",
+        img: "LOGO S.png",
+        examples: ["AT-Recovered.png", "rf-Recovered-Recovered.png"]
+      },
+      {
+        title: "بنر $10",
+        desc: "بنر مميز لتضبيط سيرفرك أو قناتك.",
+        img: "bnr.png",
+        examples: ["bnr1.png", "bnr2.png"]
+      },
+      {
+        title: "خط $4",
+        desc: "خط سيرفر ديسكورد",
+        img: "خط.png",
+        examples: ["font1.png", "font2.png"]
+      },
+      {
+        title: "برمجة سيرفر $10",
+        desc: "إعداد سيرفر ديسكورد كامل ومخصص.",
+        img: "برمجه.png",
+        examples: ["code1.png", "code2.png"]
+      },
+      {
+        title: "بكج $17",
+        desc: "عرض يشمل لوقو + بنر + خط.",
+        img: "بكج.png",
+        examples: ["pack1.png", "pack2.png"]
+      },
+      {
+        title: "تطوير $8",
+        desc: "تحسين وتطوير سيرفرك",
+        img: "تطوير.png",
+        examples: ["dev1.png", "dev2.png"]
+      },
+      {
+        title: "ثمبنيل $7",
+        desc: "تصميم صورة مصغرة حلوه لمقاطعك.",
+        img: "ثمبنيل.png",
+        examples: ["tmp1.png", "tmp.png"]
+      }
+    ];
+
+    document.querySelectorAll(".product").forEach(product => {
+      product.addEventListener("click", () => {
+        const index = parseInt(product.getAttribute("data-index"));
+        const data = productData[index];
+
+        sectionStore.classList.remove("active");
+        productDetail.classList.add("active");
+
+        detailImage.src = data.img;
+        detailTitle.textContent = data.title;
+        detailDescription.textContent = data.desc;
+
+        example1.src = data.examples[0];
+        example2.src = data.examples[1];
+      });
+    });
+
+    backToStoreBtn.onclick = () => {
+      productDetail.classList.remove("active");
+      sectionStore.classList.add("active");
+    };
+  </script>
+</body>
+</html>
